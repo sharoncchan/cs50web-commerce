@@ -1,0 +1,114 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block title %}{{ product.name}}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <main class="pt-5">
+        <div class="row g-3">
+            <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{product.image}}">
+            </div>
+            <div class="col-md-7 col-lg-7 ps-md-5 ps-lg-5">
+                <h1 class="mb-0 h4">{{ product.title }}</h1>
+                {% if winner %}
+                <div class="mt-4 alert alert-primary" role="alert" >
+                    You have won this auction with a bid of USD {{product.current_bid}}
+                  </div>
+                {% else %}
+                {% endif %}
+
+                <p>{{ product.description}}</p>
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="col p-3">
+                          
+                            <div class="col-10"><span class="h4">Starting Bid: USD{{ product.starting_bid }}</span></div>
+                            <div class="col-10"><span class="h4">Highest Bid: USD{{ product.current_bid }}</span></div>
+                        </div>
+                    </div>
+
+                    {% if user.is_authenticated %}
+
+                    <div class="col">
+                       
+
+                        <div class="row p-3">
+
+                            <div class="col-3 text-start">
+                                <button type="button" class="btn btn-info"><a class="text-decoration-none text-reset"  href="{% url 'bid' product.slug %}">Bid here</a></button>
+                            </div>
+                    
+                            <div class="col-5 text-start ">
+                                <form action="{% url 'product' product.slug %}", method="post">
+                                    {% csrf_token %}
+                                <input type="submit" class="btn btn-info" name="add_watchlist", value="{{watchlist_message}}"></input>
+                                </form>
+                            </div>
+                            <div class="col-4 text-end">
+                                <button type="button" class="btn btn-info"><a class="text-decoration-none text-reset" href="{% url 'comment' product.slug %}" >Add comment</a></button>
+                            </div>
+                         
+        
+
+                        </div>
+                      
+                    </div>
+
+                   
+                    {% endif %}
+
+
+    
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section>
+        <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card text-dark">
+                        <div class="card-body p-4">
+                            <h4 class="mb-3">Recent comments</h4>
+                            <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
+                            <div class="d-flex flex-start">
+
+                                {% for comment in comments %}
+
+                                <div>
+                                    <h6 class="fw-bold mb-1">{{comment.user}}</h6>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <p class="mb-0">
+                                        {{comment.create_date}}
+                                        </p>
+                                    </div>
+                                    <div class="mb-4">
+                                        <p class="mb-0">
+                                            {{comment.comment}}
+                                        </p>
+                                        <hr class="my-0"/>
+                                    </div>
+                                {% empty %}
+                                    No comments by users
+                                    
+                                {% endfor %}
+                                
+                    </div>
+                </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+    
+
+</div>
+{% endblock %}
+

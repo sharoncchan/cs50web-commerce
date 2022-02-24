@@ -1,0 +1,55 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<main>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Search, Bid, Review</h1>
+            <p class="lead text-muted">The one stop marketplace for everything you need. </p>
+        </div>
+        </div>
+    </section>
+
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="pb-3 h5">All Active Listings</div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            {% for product in products %}
+
+                <div class="col">
+                <div class="card mb-3" style="height:25rem;">
+                    <img class="card-img-top" alt="photo of item" src="{{ product.image }}">
+                    
+                    <div class="card-body">
+                    <p class="card-text">
+                        <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                    </p>
+                    
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{product.get_absolute_url}}">View</a></button>
+                        </div>
+                        <small class="text-muted">USD{{product.current_bid}}</small>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock %}
