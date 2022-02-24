@@ -27,8 +27,8 @@ This project contains the features below where users can:
        
     - `templates/auctions` contains all application templates.
         - `layout.html` - Base templates. Other templates extend it.
-        - `register.html` -  The page that show the register page for user to register for a new account
-        - `login.html` -  The page that show the login page for user to log in
+        - `register.html` -  shows the register page for user to register for a new account
+        - `login.html` -   shows the login page for user to log in
         - `index.html` -  The homepage of the webpage, displays all the active listings
         - `create.html` -  The page that allows user to create a new listing
         - `watchlist.html` -  The page that show all the listings the user have added into the user's watchlist
